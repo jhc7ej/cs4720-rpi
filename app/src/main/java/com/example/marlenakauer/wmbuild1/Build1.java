@@ -6,10 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.view.View;
+import android.widget.EditText;
 
 public class Build1 extends Activity {
 
-    Intent myIntent = new Intent(Build1.this, scanPage.class);
+    public final static String EXTRA_MESSAGE = "com.example.marlenakauer.wmbuild1";
+    //Intent myIntent = new Intent(Build1.this, scanPage.class);
 
     //myIntent.putExtra("key", value);
     //Build1.this.startActivity(myIntent);
@@ -39,7 +41,10 @@ public class Build1 extends Activity {
         return super.onOptionsItemSelected(item);
     }
     public void sendMessage(View view) {
-        Intent intent = new Intent(Build1.this, scanPage.class);
+        Intent intent = new Intent(this, scanPage.class);
+        EditText ipText = (EditText) findViewById(R.id.editText);
+        String message = ipText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
         }
     }
