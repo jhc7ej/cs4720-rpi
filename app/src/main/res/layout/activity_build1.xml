@@ -29,6 +29,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="sendMessage"
         android:text="Go!"
         android:id="@+id/ip_button"
         android:layout_below="@+id/editText"
