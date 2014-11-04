@@ -59,7 +59,7 @@ public class scanPage extends Activity {
     // take JSON string, add to POST and send request
     //
     public static void POST(String url, String light) {
-        url = "192.168.20.125";
+        url = "192.168.20.125/rpi/";
 
         try {
             HttpClient client = new DefaultHttpClient();
