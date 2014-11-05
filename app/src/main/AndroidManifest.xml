@@ -24,9 +24,17 @@
             android:name="com.example.marlenakauer.wmbuild1.QTscanPage"
             android:label="@string/title_activity_qtscan_page" >
             android:parentActivityName="com.example.marlenakauer.wmbuild1.Build1" >
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.marlenakauer.wmbuild1.Build1" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marlenakauer.wmbuild1.Build1" />
+        </activity>
+        <activity
+            android:name="com.example.marlenakauer.wmbuild1.QRscannerPage"
+            android:label="@string/title_activity_qrscanner_page"
+            android:parentActivityName="com.example.marlenakauer.wmbuild1.Build1" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marlenakauer.wmbuild1.Build1" />
         </activity>
     </application>
 

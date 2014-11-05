@@ -41,7 +41,7 @@ public class Build1 extends Activity {
         return super.onOptionsItemSelected(item);
     }
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, QTscanPage.class);
+        Intent intent = new Intent(this, QRscannerPage.class);
         EditText ipText = (EditText) findViewById(R.id.editText);
         String message = ipText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
