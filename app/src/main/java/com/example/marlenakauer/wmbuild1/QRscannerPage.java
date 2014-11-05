@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -97,17 +99,28 @@ public class QRscannerPage extends Activity {
     //POST, open HTTP connection,
     // create HTTP obj passing the url,
     // take JSON string, add to POST and send request
-    //
-    public static void POST(String url, String light) {
+    //when color = true, lights will be gree, when color = false lights will be red
+    public static void POST(String url, boolean color) {
         url = "192.168.20.125/rpi/";
 
         try {
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
-            JSONObject jsonObj = new JSONObject(light);
-            //  StringEntity se = new StringEntity();
+            JSONObject jsonObj = new JSONObject();
+            if (color == true) {
+                JSONArray blah = new JSONArray("[{\"intensity\":.3,\"red\":0,\"blue\":0,\"green\":255,\"lightId\":1}]");
+                jsonObj.accumulate("lights", blah);
+                jsonObj.accumulate("propagate", true);
+            }
 
-            //  post.setEntity(se);
+            if (color == false) {
+                JSONArray blah2 = new JSONArray("[{\"intensity\":.3,\"red\":255,\"blue\":0,\"green\":0,\"lightId\":1}]");
+                jsonObj.accumulate("lights", blah2);
+                jsonObj.accumulate("propagate", true);
+
+            }
+            StringEntity se = new StringEntity(jsonObj.toString());
+            post.setEntity(se);
             post.setHeader("Accept", "application/json");
             post.setHeader("Content-type", "application/json");
             client.execute(post);

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
+import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -53,10 +54,9 @@ public class Build1 extends Activity {
 
         try {
             JSONObject jsonObj = new JSONObject();
-            JSONArray blah = new JSONArray("[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}]");
+            JSONArray blah = new JSONArray("[{\"intensity\":.3,\"red\":255,\"blue\":0,\"green\":0,\"lightId\":1}]");
             jsonObj.accumulate("lights", blah);
             jsonObj.accumulate("propagate", true);
-
             System.out.println(jsonObj.toString());
         }
         catch (Exception e) {
