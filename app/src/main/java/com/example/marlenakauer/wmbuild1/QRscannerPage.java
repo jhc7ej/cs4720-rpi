@@ -38,8 +38,8 @@ public class QRscannerPage extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*setContentView(R.layout.activity_qrscanner_page);
-        if (savedInstanceState == null) {
+        setContentView(R.layout.activity_qrscanner_page);
+        /* if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
