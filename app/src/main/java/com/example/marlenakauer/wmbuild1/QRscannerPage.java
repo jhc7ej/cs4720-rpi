@@ -48,12 +48,12 @@ public class QRscannerPage extends Activity {
         String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
 
         // Create the text view
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(message);
+       // TextView textView = new TextView(this);
+       // textView.setTextSize(40);
+       // textView.setText(message);
 
         // Set the text view as the activity layout
-        setContentView(textView);
+        //setContentView(textView);
 
     }
 
