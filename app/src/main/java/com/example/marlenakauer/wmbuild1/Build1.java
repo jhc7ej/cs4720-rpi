@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONObject;
+
 public class Build1 extends Activity {
 
     public final static String EXTRA_MESSAGE = "com.example.marlenakauer.wmbuild1";
@@ -46,8 +48,18 @@ public class Build1 extends Activity {
         String message = ipText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+        String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}]}";
+        JSONObject jsonObj;
+        try {
+            jsonObj = new JSONObject(red);
+            System.out.println(jsonObj.toString());
         }
-    }
+        catch (Exception e) {
+        System.out.println("Uhoh no JSON");
+        }
+
+        }
+        }
 
 
 

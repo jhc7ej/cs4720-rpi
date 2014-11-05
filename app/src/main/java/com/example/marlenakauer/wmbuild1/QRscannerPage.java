@@ -13,8 +13,25 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.TextView;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
 
 public class QRscannerPage extends Activity {
+
+    public class Light {
+    public String lightId = "";
+    public String red = "";
+    public String blue = "";
+    public String green = "";
+    public String intensity = "";
+    public String propagate = "";
+    }
+
+    public String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}]}";
+    public String green = "{\"lights\":\"[{\"lightId\":1,\"red\":0,\"blue\":0,\"green\":255,\"intensity\":.3}]}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,4 +93,32 @@ public class QRscannerPage extends Activity {
             return rootView;
         }
     }
+
+    //POST, open HTTP connection,
+    // create HTTP obj passing the url,
+    // take JSON string, add to POST and send request
+    //
+    public static void POST(String url, String light) {
+        url = "192.168.20.125/rpi/";
+
+        try {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(url);
+            JSONObject jsonObj = new JSONObject(light);
+            //  StringEntity se = new StringEntity();
+
+            //  post.setEntity(se);
+            post.setHeader("Accept", "application/json");
+            post.setHeader("Content-type", "application/json");
+            client.execute(post);
+        } catch (Exception e) {
+
+            System.out.println("Uh-oh there's an error!");
+
+
+        }
+
+
+    }
+
 }

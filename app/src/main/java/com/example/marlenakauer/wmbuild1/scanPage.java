@@ -69,6 +69,7 @@ public class scanPage extends Activity {
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
             JSONObject jsonObj = new JSONObject(light);
+
           //  StringEntity se = new StringEntity();
 
           //  post.setEntity(se);
