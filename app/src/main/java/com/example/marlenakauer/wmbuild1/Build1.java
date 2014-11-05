@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -44,6 +47,41 @@ public class Build1 extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public static void POST(String url, boolean color) {
+        url = "192.168.20.125/rpi/";
+
+        try {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(url);
+            JSONObject jsonObj = new JSONObject();
+            if (color == true) {
+                JSONArray blah = new JSONArray("[{\"intensity\":.3,\"red\":0,\"blue\":0,\"green\":255,\"lightId\":1}]");
+                jsonObj.accumulate("lights", blah);
+                jsonObj.accumulate("propagate", true);
+            }
+
+            if (color == false) {
+                JSONArray blah2 = new JSONArray("[{\"intensity\":.3,\"red\":255,\"blue\":0,\"green\":0,\"lightId\":1}]");
+                jsonObj.accumulate("lights", blah2);
+                jsonObj.accumulate("propagate", true);
+
+            }
+            StringEntity se = new StringEntity(jsonObj.toString());
+            post.setEntity(se);
+            post.setHeader("Accept", "application/json");
+            post.setHeader("Content-type", "application/json");
+            client.execute(post);
+        } catch (Exception e) {
+
+            System.out.println("Uh-oh there's an error!");
+
+
+        }
+
+
+    }
+
     public void sendMessage(View view) {
         Intent intent = new Intent(this, QRscannerPage.class);
         EditText ipText = (EditText) findViewById(R.id.editText);
@@ -52,16 +90,7 @@ public class Build1 extends Activity {
         startActivity(intent);
        // String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}],\"propagate\": true}";
 
-        try {
-            JSONObject jsonObj = new JSONObject();
-            JSONArray blah = new JSONArray("[{\"intensity\":.3,\"red\":255,\"blue\":0,\"green\":0,\"lightId\":1}]");
-            jsonObj.accumulate("lights", blah);
-            jsonObj.accumulate("propagate", true);
-            System.out.println(jsonObj.toString());
-        }
-        catch (Exception e) {
-        System.out.println("Uhoh no JSON");
-        }
+        POST("192.168.20.125/rpi/", true);
 
         }
         }
