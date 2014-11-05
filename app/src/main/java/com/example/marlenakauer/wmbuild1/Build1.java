@@ -2,6 +2,7 @@ package com.example.marlenakauer.wmbuild1;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -73,8 +74,9 @@ public class Build1 extends Activity {
             post.setHeader("Content-type", "application/json");
             client.execute(post);
         } catch (Exception e) {
-
             System.out.println("Uh-oh there's an error!");
+            Log.e("MYAPP", "exception", e);
+
 
 
         }
