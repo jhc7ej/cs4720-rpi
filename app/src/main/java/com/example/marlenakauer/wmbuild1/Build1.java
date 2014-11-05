@@ -48,10 +48,10 @@ public class Build1 extends Activity {
         String message = ipText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-        String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}]}";
+       // String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}],\"propagate\": true}";
         JSONObject jsonObj;
         try {
-            jsonObj = new JSONObject(red);
+            jsonObj = new JSONObject("{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}],\"propagate\": true}");
             System.out.println(jsonObj.toString());
         }
         catch (Exception e) {
