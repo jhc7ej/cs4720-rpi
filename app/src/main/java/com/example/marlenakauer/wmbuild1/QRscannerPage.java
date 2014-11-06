@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,11 +47,14 @@ public class QRscannerPage extends Activity {
 
         Button myButton = (Button) findViewById(R.id.success);
         Button myButton2 = (Button) findViewById(R.id.fail);
+        Intent intent = getIntent();
+        final String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
 
         myButton.setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View v) {
                Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+               new MyAsyncTask().execute(message, "true");
            }
         });
 
@@ -58,6 +62,7 @@ public class QRscannerPage extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(QRscannerPage.this, "Another Button Clicked", Toast.LENGTH_SHORT).show();
+            new MyAsyncTask().execute(message, "false");
             }
         });
 
@@ -66,8 +71,6 @@ public class QRscannerPage extends Activity {
 //                    .add(R.id.container, new PlaceholderFragment())
 //                    .commit();
 //        }
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
 
         // Create the text view
 //       TextView textView = new TextView(this);
@@ -150,6 +153,18 @@ public class QRscannerPage extends Activity {
 
             System.out.println("Uh-oh there's an error!");
 
+
+        }
+
+
+    }
+
+    private class MyAsyncTask extends AsyncTask<String, Integer, Double> {
+        @Override
+        protected Double doInBackground(String... params) {
+//maybe use Boolean.parseBoolean(params[1])
+            POST(params[0], Boolean.valueOf(params[1]));
+            return null;
 
         }
 
