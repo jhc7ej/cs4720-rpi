@@ -3,23 +3,27 @@ package com.example.marlenakauer.wmbuild1;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.TextView;
-
+import android.view.View.OnClickListener;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
-import org.json.JSONObject;
+import android.widget.Button;
+import android.widget.Toast;
 
+import org.json.JSONObject;
 
 public class QRscannerPage extends Activity {
 
@@ -39,21 +43,39 @@ public class QRscannerPage extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrscanner_page);
-        /* if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }*/
+
+        Button myButton = (Button) findViewById(R.id.success);
+        Button myButton2 = (Button) findViewById(R.id.fail);
+
+        myButton.setOnClickListener(new OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+           }
+        });
+
+        myButton2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(QRscannerPage.this, "Another Button Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        if (savedInstanceState == null) {
+//            getFragmentManager().beginTransaction()
+//                    .add(R.id.container, new PlaceholderFragment())
+//                    .commit();
+//        }
         Intent intent = getIntent();
         String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
 
         // Create the text view
-       // TextView textView = new TextView(this);
-       // textView.setTextSize(40);
-       // textView.setText(message);
-
-        // Set the text view as the activity layout
-        //setContentView(textView);
+//       TextView textView = new TextView(this);
+//       textView.setTextSize(40);
+//       textView.setText(message);
+//
+//       //Set the text view as the activity layout
+//       setContentView(textView);
 
     }
 

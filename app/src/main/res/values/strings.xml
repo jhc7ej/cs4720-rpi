@@ -7,5 +7,7 @@
     <string name="title_activity_scan_page">scanPage</string>
     <string name="title_activity_qtscan_page">QTscanPage</string>
     <string name="title_activity_qrscanner_page">QRscannerPage</string>
+    <string name="Success">Success</string>
+    <string name="Failure">Failure</string>
 
 </resources>

@@ -92,7 +92,7 @@ public class Build1 extends Activity {
         startActivity(intent);
        // String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}],\"propagate\": true}";
 
-        POST("192.168.20.125/rpi/", true);
+        //POST("192.168.20.125/rpi/", true);
 
         }
         }
