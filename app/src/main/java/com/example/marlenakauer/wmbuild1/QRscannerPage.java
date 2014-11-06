@@ -1,21 +1,19 @@
 package com.example.marlenakauer.wmbuild1;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.TextView;
-import android.view.View.OnClickListener;
+
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -27,18 +25,6 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 public class QRscannerPage extends Activity {
-
-    public class Light {
-    public String lightId = "";
-    public String red = "";
-    public String blue = "";
-    public String green = "";
-    public String intensity = "";
-    public String propagate = "";
-    }
-
-    public String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}]}";
-    public String green = "{\"lights\":\"[{\"lightId\":1,\"red\":0,\"blue\":0,\"green\":255,\"intensity\":.3}]}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,26 +48,11 @@ public class QRscannerPage extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(QRscannerPage.this, "Another Button Clicked", Toast.LENGTH_SHORT).show();
-            new MyAsyncTask().execute(message, "false");
+                new MyAsyncTask().execute(message, "false");
             }
         });
 
-//        if (savedInstanceState == null) {
-//            getFragmentManager().beginTransaction()
-//                    .add(R.id.container, new PlaceholderFragment())
-//                    .commit();
-//        }
-
-        // Create the text view
-//       TextView textView = new TextView(this);
-//       textView.setTextSize(40);
-//       textView.setText(message);
-//
-//       //Set the text view as the activity layout
-//       setContentView(textView);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -121,25 +92,21 @@ public class QRscannerPage extends Activity {
         }
     }
 
-    //POST, open HTTP connection,
-    // create HTTP obj passing the url,
-    // take JSON string, add to POST and send request
-    //when color = true, lights will be gree, when color = false lights will be red
     public static void POST(String url, boolean color) {
-        url = "192.168.20.125/rpi/";
+        url = "http://" + url + "/rpi/";
 
         try {
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
             JSONObject jsonObj = new JSONObject();
             if (color == true) {
-                JSONArray blah = new JSONArray("[{\"intensity\":.3,\"red\":0,\"blue\":0,\"green\":255,\"lightId\":1}]");
+                JSONArray blah = new JSONArray("[{\"intensity\":.8,\"red\":0,\"blue\":0,\"green\":255,\"lightId\":1}]");
                 jsonObj.accumulate("lights", blah);
                 jsonObj.accumulate("propagate", true);
             }
 
             if (color == false) {
-                JSONArray blah2 = new JSONArray("[{\"intensity\":.3,\"red\":255,\"blue\":0,\"green\":0,\"lightId\":1}]");
+                JSONArray blah2 = new JSONArray("[{\"intensity\":.8,\"red\":255,\"blue\":0,\"green\":0,\"lightId\":1}]");
                 jsonObj.accumulate("lights", blah2);
                 jsonObj.accumulate("propagate", true);
 
@@ -148,21 +115,19 @@ public class QRscannerPage extends Activity {
             post.setEntity(se);
             post.setHeader("Accept", "application/json");
             post.setHeader("Content-type", "application/json");
-            client.execute(post);
+            HttpResponse response = client.execute(post);
+
         } catch (Exception e) {
 
-            System.out.println("Uh-oh there's an error!");
-
+            Log.e("WMBuild1", Log.getStackTraceString(e));
 
         }
-
 
     }
 
     private class MyAsyncTask extends AsyncTask<String, Integer, Double> {
         @Override
         protected Double doInBackground(String... params) {
-//maybe use Boolean.parseBoolean(params[1])
             POST(params[0], Boolean.valueOf(params[1]));
             return null;
 
