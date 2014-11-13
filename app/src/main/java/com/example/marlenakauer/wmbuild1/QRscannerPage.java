@@ -1,10 +1,13 @@
 package com.example.marlenakauer.wmbuild1;
+//package com.google.zxing:core:3.1.0;
+//package com.google.zxing:android-integration:3.1.0;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,6 +44,13 @@ public class QRscannerPage extends Activity {
            public void onClick(View v) {
                Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
                new MyAsyncTask().execute(message, "true");
+               //put this in scan button onclick listener
+              // Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+              // intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+               //startActivityForResult(intent, 0);
+               Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+               startActivityForResult(intent, 0);
+
            }
         });
 
