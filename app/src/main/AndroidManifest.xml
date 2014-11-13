@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.marlenakauer.wmbuild1" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.hardware.camera" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.marlenakauer.wmbuild1.Build1"
+            android:name=".Build1"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.marlenakauer.wmbuild1.scanPage"
+            android:name=".scanPage"
             android:label="@string/title_activity_scan_page" >
         </activity>
         <activity
-            android:name="com.example.marlenakauer.wmbuild1.QTscanPage"
+            android:name=".QTscanPage"
             android:label="@string/title_activity_qtscan_page" >
             android:parentActivityName="com.example.marlenakauer.wmbuild1.Build1" >
             <meta-data
@@ -31,12 +34,16 @@
                 android:value="com.example.marlenakauer.wmbuild1.Build1" />
         </activity>
         <activity
-            android:name="com.example.marlenakauer.wmbuild1.QRscannerPage"
+            android:name=".QRscannerPage"
             android:label="@string/title_activity_qrscanner_page"
-            android:parentActivityName="com.example.marlenakauer.wmbuild1.Build1" >
+            android:parentActivityName=".Build1" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.marlenakauer.wmbuild1.Build1" />
+        </activity>
+        <activity
+            android:name=".EventSelector"
+            android:label="@string/title_activity_event_selector" >
         </activity>
     </application>
 

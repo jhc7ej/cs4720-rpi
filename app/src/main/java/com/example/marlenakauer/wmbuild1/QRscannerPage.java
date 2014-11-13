@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,14 +34,19 @@ public class QRscannerPage extends Activity {
 
         Button myButton = (Button) findViewById(R.id.success);
         Button myButton2 = (Button) findViewById(R.id.fail);
+        Button myButton3 = (Button) findViewById(R.id.scan);
+
         Intent intent = getIntent();
         final String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
 
         myButton.setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View v) {
-               Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-               new MyAsyncTask().execute(message, "true");
+               //Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+               //new MyAsyncTask().execute(message, "true");
+
+               Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+               startActivityForResult(intent, 0);
            }
         });
 
@@ -49,6 +55,14 @@ public class QRscannerPage extends Activity {
             public void onClick(View v) {
                 Toast.makeText(QRscannerPage.this, "Another Button Clicked", Toast.LENGTH_SHORT).show();
                 new MyAsyncTask().execute(message, "false");
+            }
+        });
+
+        myButton3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QRscannerPage.this, EventSelector.class);
+                startActivity(intent);
             }
         });
 

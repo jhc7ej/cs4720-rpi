@@ -9,5 +9,8 @@
     <string name="title_activity_qrscanner_page">QRscannerPage</string>
     <string name="Success">Success</string>
     <string name="Failure">Failure</string>
+    <string name="title_activity_event_selector">EventSelector</string>
+    <string name="Select">Select Event</string>
+    <string name="Events">To Events</string>
 
 </resources>
