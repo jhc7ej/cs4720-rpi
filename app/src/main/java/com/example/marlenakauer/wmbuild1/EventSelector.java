@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,14 +20,7 @@ public class EventSelector extends ListActivity {
 
     static final String[] COUNTRIES = new String[] {
 
-            "Camera", "Albania", "Algeria", "American Samoa",
-            "Andorra", "Angola", "Anguilla", "Antarctica",
-            "Antigua and Barbuda", "Argentina", "Armenia", "Aruba",
-            "Australia", "Austria", "Azerbaijan", "Bahrain",
-            "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize",
-            "Benin", "Bermuda", "Bhutan", "Bolivia",
-            "Bosnia and Herzegovina", "Botswana", "Bouvet Island",
-            "Brazil", "British Indian Ocean Territory"
+            "Camera"
     };
 
     @Override
@@ -63,7 +58,7 @@ public class EventSelector extends ListActivity {
         super.onListItemClick(l, v, position, id);
 
         new AlertDialog.Builder(this)
-                .setMessage("Go to camera ")
+                .setMessage("Picture time! ")
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {}
@@ -71,11 +66,12 @@ public class EventSelector extends ListActivity {
                 .show();
 
         Toast.makeText(EventSelector.this,
-                "ListView: " + l.toString() + "\n" +
-                        "View: " + v.toString() + "\n" +
-                        "position: " + String.valueOf(position) + "\n" +
-                        "id: " + String.valueOf(id),
+                "Camera goes here",
                 Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+
     }
 
 }
