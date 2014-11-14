@@ -12,5 +12,6 @@
     <string name="title_activity_event_selector">EventSelector</string>
     <string name="Select">Select Event</string>
     <string name="Events">To Events</string>
+    <string name="title_activity_searchby_date">SearchbyDate</string>
 
 </resources>

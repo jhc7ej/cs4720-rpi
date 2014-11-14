@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +28,18 @@ public class EventSelector extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_selector);
+        Button dateButton = (Button) findViewById(R.id.date);
+
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+                //new MyAsyncTask().execute(message, "true");
+
+                Intent intent = new Intent(EventSelector.this, SearchbyDate.class);
+                startActivity(intent);
+            }
+        });
         setListAdapter(new ArrayAdapter < String >(this,
                 android.R.layout.simple_list_item_1, COUNTRIES));
         getListView().setTextFilterEnabled(true);
