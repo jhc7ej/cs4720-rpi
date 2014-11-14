@@ -70,13 +70,13 @@ public class EventSelector extends ListActivity {
 
         super.onListItemClick(l, v, position, id);
 
-        new AlertDialog.Builder(this)
-                .setMessage("Picture time! ")
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {}
-                        })
-                .show();
+//        new AlertDialog.Builder(this)
+//                .setMessage("Picture time! ")
+//                .setPositiveButton("OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {}
+//                        })
+//                .show();
 
         Toast.makeText(EventSelector.this,
                 "Camera goes here",

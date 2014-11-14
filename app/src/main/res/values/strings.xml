@@ -13,5 +13,12 @@
     <string name="Select">Select Event</string>
     <string name="Events">To Events</string>
     <string name="title_activity_searchby_date">SearchbyDate</string>
+    <string name="title_activity_splash_screen">Splash Screen</string>
+    <string name="QRScanner">QR Scanner</string>
+    <string name="cs4720">CS 4720 Mobile Project</string>
+    <string name="justin">Justin Cajayon (jhc3ej)</string>
+    <string name="marlena">Marlena Kauer (mak4wd)</string>
+    <string name="jed">Jed Divina (jed4hv)</string>
+    <string name="title">Ticket QR Scanner</string>
 
 </resources>
