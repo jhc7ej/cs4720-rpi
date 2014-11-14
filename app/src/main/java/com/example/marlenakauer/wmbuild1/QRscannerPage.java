@@ -1,6 +1,4 @@
 package com.example.marlenakauer.wmbuild1;
-//package com.google.zxing:core:3.1.0;
-//package com.google.zxing:android-integration:3.1.0;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+import android.view.ViewGroup; //hehehehehe
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -36,21 +34,19 @@ public class QRscannerPage extends Activity {
 
         Button myButton = (Button) findViewById(R.id.success);
         Button myButton2 = (Button) findViewById(R.id.fail);
+        Button myButton3 = (Button) findViewById(R.id.scan);
+
         Intent intent = getIntent();
         final String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
 
         myButton.setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View v) {
-               Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-               new MyAsyncTask().execute(message, "true");
-               //put this in scan button onclick listener
-              // Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-              // intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-               //startActivityForResult(intent, 0);
+               //Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+               //new MyAsyncTask().execute(message, "true");
+
                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                startActivityForResult(intent, 0);
-
            }
         });
 
@@ -59,6 +55,14 @@ public class QRscannerPage extends Activity {
             public void onClick(View v) {
                 Toast.makeText(QRscannerPage.this, "Another Button Clicked", Toast.LENGTH_SHORT).show();
                 new MyAsyncTask().execute(message, "false");
+            }
+        });
+
+        myButton3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QRscannerPage.this, EventSelector.class);
+                startActivity(intent);
             }
         });
 

@@ -32,8 +32,7 @@
         android:onClick="sendMessage"
         android:text="Go!"
         android:id="@+id/ip_button"
-        android:layout_below="@+id/editText"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginTop="23dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
