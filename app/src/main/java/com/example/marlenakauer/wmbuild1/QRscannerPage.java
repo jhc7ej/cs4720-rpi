@@ -23,6 +23,8 @@ import org.json.JSONArray;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+
 import org.json.JSONObject;
 
 public class QRscannerPage extends Activity {
@@ -38,7 +40,7 @@ public class QRscannerPage extends Activity {
 
         Intent intent = getIntent();
         final String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
-
+        IntentIntegrator integrator = new IntentIntegrator(QRscannerPage.this);
 //        myButton.setOnClickListener(new OnClickListener() {
 //           @Override
 //           public void onClick(View v) {
