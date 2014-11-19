@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONObject;
 
@@ -38,9 +39,9 @@ public class QRscannerPage extends Activity {
 //        Button myButton2 = (Button) findViewById(R.id.fail);
         Button myButton3 = (Button) findViewById(R.id.scan);
 
-        Intent intent = getIntent();
-        final String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
-        IntentIntegrator integrator = new IntentIntegrator(QRscannerPage.this);
+       // Intent intent = getIntent();
+       // final String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
+
 //        myButton.setOnClickListener(new OnClickListener() {
 //           @Override
 //           public void onClick(View v) {
@@ -63,8 +64,13 @@ public class QRscannerPage extends Activity {
         myButton3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QRscannerPage.this, EventSelector.class);
-                startActivity(intent);
+                IntentIntegrator integrator = new IntentIntegrator(QRscannerPage.this);
+                integrator.addExtra("SCAN_WIDTH", 640);
+                integrator.addExtra("SCAN_HEIGHT", 480);
+                integrator.addExtra("SCAN_MODE", "QR_CODE_MODE,PRODUCT_MODE");
+                //customize the prompt message before scanning
+                integrator.addExtra("PROMPT_MESSAGE", "Scanner Start!");
+                integrator.initiateScan(IntentIntegrator.PRODUCT_CODE_TYPES);
             }
         });
 
@@ -149,6 +155,20 @@ public class QRscannerPage extends Activity {
 
         }
 
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (result != null) {
+            String contents = result.getContents();
+            if (contents != null) {
+             //   showDialog(R.string.result_succeeded, result.toString());
+            } else {
+               // showDialog(R.string.result_failed, getString(R.string.result_failed_why));
+            }
+        }
 
     }
 
