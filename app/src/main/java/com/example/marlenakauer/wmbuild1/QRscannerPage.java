@@ -159,17 +159,23 @@ public class QRscannerPage extends Activity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (result != null) {
-            String contents = result.getContents();
-            if (contents != null) {
-             //   showDialog(R.string.result_succeeded, result.toString());
-            } else {
-               // showDialog(R.string.result_failed, getString(R.string.result_failed_why));
-            }
-        }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case IntentIntegrator.REQUEST_CODE:
+                IntentResult scanResult = IntentIntegrator.parseActivityResult(
+                        requestCode, resultCode, data);
+                if (scanResult == null) {
+                    return;
+                }
+                final String result = scanResult.getContents(); // Your result
 
+                if (result != null) {
+                    System.out.print("Your result is: " + result);
+                }
+                break;
+            default:
+        }
     }
 
 }
