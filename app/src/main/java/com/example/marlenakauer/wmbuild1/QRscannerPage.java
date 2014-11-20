@@ -68,7 +68,7 @@ public class QRscannerPage extends Activity {
                 IntentIntegrator integrator = new IntentIntegrator(QRscannerPage.this);
                 integrator.addExtra("SCAN_WIDTH", 640);
                 integrator.addExtra("SCAN_HEIGHT", 480);
-                integrator.addExtra("SCAN_MODE", "QR_CODE_MODE,PRODUCT_MODE");
+                integrator.addExtra("SCAN_FORMATS", "QR_CODE");
                 //customize the prompt message before scanning
                 integrator.addExtra("PROMPT_MESSAGE", "Scanner Start!");
                 integrator.initiateScan(IntentIntegrator.PRODUCT_CODE_TYPES);
@@ -166,9 +166,17 @@ public class QRscannerPage extends Activity {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 // Handle successful scan
-                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP, 25, 400);
-                toast.show();
+                if (format.equals("true")) {
+                    new MyAsyncTask().execute("true", "true");
+                }
+
+                else {
+                    new MyAsyncTask().execute("false", "false");
+
+                }
+//                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
+//                toast.setGravity(Gravity.TOP, 25, 400);
+//                toast.show();
             } else if (resultCode == RESULT_CANCELED) {
                 // Handle cancel
                 Toast toast = Toast.makeText(this, "Scan was Cancelled!", Toast.LENGTH_LONG);
