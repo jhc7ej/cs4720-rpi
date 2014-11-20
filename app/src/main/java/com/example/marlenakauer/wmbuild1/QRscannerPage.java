@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -159,22 +160,22 @@ public class QRscannerPage extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case IntentIntegrator.REQUEST_CODE:
-                IntentResult scanResult = IntentIntegrator.parseActivityResult(
-                        requestCode, resultCode, data);
-                if (scanResult == null) {
-                    return;
-                }
-                final String result = scanResult.getContents(); // Your result
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                // Handle successful scan
+                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 25, 400);
+                toast.show();
+            } else if (resultCode == RESULT_CANCELED) {
+                // Handle cancel
+                Toast toast = Toast.makeText(this, "Scan was Cancelled!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 25, 400);
+                toast.show();
 
-                if (result != null) {
-                    System.out.print("Your result is: " + result);
-                }
-                break;
-            default:
+            }
         }
     }
 
