@@ -161,8 +161,9 @@ public class QRscannerPage extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         Intent intent2 = getIntent();
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         final String message = intent2.getStringExtra(Build1.EXTRA_MESSAGE);
-        if (requestCode == 0) {
+        //if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
@@ -172,12 +173,15 @@ public class QRscannerPage extends Activity {
                 //}
 
                // else {
-                    new MyAsyncTask().execute("http://192.168.20.123/rpi/", "false");
+
+                //$$$$$
+                //have database check if id string is in, if in new asynctask.execute(message, "true") else false
+                    new MyAsyncTask().execute(message, result.getContents());
 
                 //}
-//                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
-//                toast.setGravity(Gravity.TOP, 25, 400);
-//                toast.show();
+               Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 25, 400);
+                toast.show();
             } else if (resultCode == RESULT_CANCELED) {
                 // Handle cancel
                 Toast toast = Toast.makeText(this, "Scan was Cancelled!", Toast.LENGTH_LONG);
@@ -185,7 +189,7 @@ public class QRscannerPage extends Activity {
                 toast.show();
 
             }
-        }
+        //}
     }
 
 }
