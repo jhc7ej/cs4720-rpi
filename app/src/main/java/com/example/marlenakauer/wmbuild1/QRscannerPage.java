@@ -40,8 +40,7 @@ public class QRscannerPage extends Activity {
 //        Button myButton2 = (Button) findViewById(R.id.fail);
         Button myButton3 = (Button) findViewById(R.id.scan);
 
-       // Intent intent = getIntent();
-       // final String message = intent.getStringExtra(Build1.EXTRA_MESSAGE);
+
 
 //        myButton.setOnClickListener(new OnClickListener() {
 //           @Override
@@ -161,19 +160,21 @@ public class QRscannerPage extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Intent intent2 = getIntent();
+        final String message = intent2.getStringExtra(Build1.EXTRA_MESSAGE);
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 // Handle successful scan
-                if (format.equals("true")) {
-                    new MyAsyncTask().execute("true", "true");
-                }
+//                if (contents.equals("true")) {
+                   // new MyAsyncTask().execute(message, "true");
+                //}
 
-                else {
-                    new MyAsyncTask().execute("false", "false");
+               // else {
+                    new MyAsyncTask().execute("http://192.168.20.123/rpi/", "false");
 
-                }
+                //}
 //                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
 //                toast.setGravity(Gravity.TOP, 25, 400);
 //                toast.show();
