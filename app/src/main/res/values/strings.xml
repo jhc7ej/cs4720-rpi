@@ -20,5 +20,9 @@
     <string name="marlena">Marlena Kauer (mak4wd)</string>
     <string name="jed">Jed Divina (jed4hv)</string>
     <string name="title">Ticket QR Scanner</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="eventsearch">Search for Event (ex. \"ms5 event\")</string>
+    <string name="searchbutton">Search</string>
+    <string name="title_activity_event_confirmation">eventConfirmation</string>
 
 </resources>

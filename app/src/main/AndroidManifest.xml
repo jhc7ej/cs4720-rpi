@@ -14,14 +14,13 @@
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:debuggable="true"
-        tools:ignore="HardcodedDebugMode">
-
+        tools:ignore="HardcodedDebugMode" >
         <activity
-            android:name=".SplashScreen"
+            android:name="com.example.marlenakauer.wmbuild1.SplashScreen"
             android:label="@string/title_activity_splash_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,20 +29,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Build1"
+            android:name="com.example.marlenakauer.wmbuild1.Build1"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".QRscannerPage"
+            android:name="com.example.marlenakauer.wmbuild1.QRscannerPage"
             android:label="@string/title_activity_qrscanner_page"
-            android:parentActivityName=".Build1" >
+            android:parentActivityName="com.example.marlenakauer.wmbuild1.Build1" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.marlenakauer.wmbuild1.Build1" />
         </activity>
         <activity
-            android:name=".EventSelector"
+            android:name="com.example.marlenakauer.wmbuild1.EventSelector"
             android:label="@string/title_activity_event_selector" >
+        </activity>
+        <activity
+            android:name="com.example.marlenakauer.wmbuild1.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.example.marlenakauer.wmbuild1.eventConfirmation"
+            android:label="@string/title_activity_event_confirmation"
+            android:parentActivityName="com.example.marlenakauer.wmbuild1.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marlenakauer.wmbuild1.MainActivity" />
         </activity>
     </application>
 
