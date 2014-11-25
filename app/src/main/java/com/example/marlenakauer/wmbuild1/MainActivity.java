@@ -2,12 +2,14 @@ package com.example.marlenakauer.wmbuild1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,6 +22,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -28,8 +31,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
     public static ArrayList<String> attendees = new ArrayList<String>();
-//    String blah = "mak4wd@virginia.edu";
-//    attendees.add("mak4wd@virginia.edu");
+
 
 
     @Override
@@ -46,20 +48,7 @@ public class MainActivity extends Activity {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(MainActivity.this, Build1.class);
-               try {
-                   HttpClient client = new DefaultHttpClient();
-                   String targetUrl = "http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU";
-                   HttpGet httpGet = new HttpGet(targetUrl);
-                   HttpResponse response = null;
-                   response = client.execute(httpGet);
-                   HttpEntity entity = response.getEntity();
-                   if(entity!=null){
-                       Log.v("GET RESPONSE", EntityUtils.toString(entity));
-                   }
-               }
-               catch(Exception e){
-                   e.printStackTrace();
-               }
+               new HttpAsyncTask().execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
                startActivity(intent);
                finish();
            }
@@ -67,6 +56,60 @@ public class MainActivity extends Activity {
 
     }
 
+
+    public static String GET(String url){
+        InputStream inputStream = null;
+        String result = "";
+        try {
+
+            // create HttpClient
+            HttpClient httpclient = new DefaultHttpClient();
+
+            // make GET request to the given URL
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+
+            // receive response as inputStream
+            inputStream = httpResponse.getEntity().getContent();
+
+            // convert inputstream to string
+            if(inputStream != null)
+                result = convertInputStreamToString(inputStream);
+            else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+
+        return result;
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException, IOException {
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
+
+    }
+
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return GET(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+            //etResponse.setText(result);
+        //Parse JSON and add to arraylist
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,3 +133,4 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 }
+
