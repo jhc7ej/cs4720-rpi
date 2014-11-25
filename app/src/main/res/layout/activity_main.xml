@@ -6,18 +6,13 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.marlenakauer.wmbuild1.MainActivity">
 
-    <TextView android:text="@string/eventsearch" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/eventSearch" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
-        android:layout_below="@+id/eventSearch"
-        android:layout_toEndOf="@+id/eventSearch"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -25,8 +20,16 @@
         android:layout_height="wrap_content"
         android:text="@string/searchbutton"
         android:id="@+id/button"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="46dp"
         android:layout_below="@+id/editText2"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/eventidsearch"
+        android:id="@+id/textView5"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
