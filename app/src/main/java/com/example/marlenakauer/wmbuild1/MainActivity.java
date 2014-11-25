@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -40,8 +41,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
       //String blah = "mak4wd@virginia.edu";
-      attendees.add("mak4wd@virginia.edu");
-      attendees.add("jhc7ej@virginia.edu");
+     // attendees.add("mak4wd@virginia.edu");
+      //attendees.add("jhc7ej@virginia.edu");
 
         Button myButton = (Button) findViewById(R.id.button);
         myButton.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +107,18 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+            try {
+                JSONObject json = new JSONObject(result);
+                JSONArray attendeeArray = json.getJSONArray("attendees");
+                for (int i = 0; i < attendeeArray.length(); i++) {
+                    JSONObject tmp = attendeeArray.getJSONObject(i);
+                    attendees.add(tmp.getString("email"));
+                }
+            }
+            catch (Exception e) {
+                Log.d("JSONObject", e.getLocalizedMessage());
+            }
+
             //etResponse.setText(result);
         //Parse JSON and add to arraylist
         }
