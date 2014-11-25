@@ -164,9 +164,20 @@ public class QRscannerPage extends Activity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         final String message = intent2.getStringExtra(Build1.EXTRA_MESSAGE);
         //if (requestCode == 0) {
+        String validAttendee = "false";
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+
+                for (int i =0; i < MainActivity.attendees.size(); i++) {
+                    if (MainActivity.attendees.get(i).equals(result.getContents())) {
+                        validAttendee = "true";
+                    }
+                    else {
+                        validAttendee = "false";
+                    }
+
+                }
                 // Handle successful scan
 //                if (contents.equals("true")) {
                    // new MyAsyncTask().execute(message, "true");
@@ -176,7 +187,7 @@ public class QRscannerPage extends Activity {
 
                 //$$$$$
                 //have database check if id string is in, if in new asynctask.execute(message, "true") else false
-                    new MyAsyncTask().execute(message, result.getContents());
+                    new MyAsyncTask().execute(message, validAttendee);
 
                 //}
                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);

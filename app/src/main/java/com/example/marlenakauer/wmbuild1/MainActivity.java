@@ -22,9 +22,15 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
+
+    public static ArrayList<String> attendees = new ArrayList<String>();
+    //String blah = "mak4wd@virginia.edu";
+  //  attendees.add("mak4wd@virginia.edu");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
