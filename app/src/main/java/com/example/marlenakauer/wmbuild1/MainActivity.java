@@ -41,7 +41,8 @@ public class MainActivity extends Activity {
         myButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               // Intent intent = new Intent(MainActivity.this, QRscannerPage.class);
+               System.out.println("hi");
+               Intent intent = new Intent(MainActivity.this, Build1.class);
                try {
                    HttpClient client = new DefaultHttpClient();
                    String targetUrl = "http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU";
@@ -56,8 +57,8 @@ public class MainActivity extends Activity {
                catch(Exception e){
                    e.printStackTrace();
                }
-//               startActivity(intent);
-//               finish();
+               startActivity(intent);
+               finish();
            }
         });
 
