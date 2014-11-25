@@ -29,8 +29,11 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class QRscannerPage extends Activity {
 
+//    public static ArrayList<String> attendeestable = MainActivity.attendees;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,6 @@ public class QRscannerPage extends Activity {
 //        Button myButton = (Button) findViewById(R.id.success);
 //        Button myButton2 = (Button) findViewById(R.id.fail);
         Button myButton3 = (Button) findViewById(R.id.scan);
-
 
 
 //        myButton.setOnClickListener(new OnClickListener() {

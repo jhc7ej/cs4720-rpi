@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
     public static ArrayList<String> attendees = new ArrayList<String>();
-    //String blah = "mak4wd@virginia.edu";
-  //  attendees.add("mak4wd@virginia.edu");
+//    String blah = "mak4wd@virginia.edu";
+//    attendees.add("mak4wd@virginia.edu");
 
 
     @Override
@@ -37,11 +37,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+      //String blah = "mak4wd@virginia.edu";
+      attendees.add("mak4wd@virginia.edu");
+      attendees.add("jhc7ej@virginia.edu");
+
         Button myButton = (Button) findViewById(R.id.button);
         myButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               System.out.println("hi");
                Intent intent = new Intent(MainActivity.this, Build1.class);
                try {
                    HttpClient client = new DefaultHttpClient();
