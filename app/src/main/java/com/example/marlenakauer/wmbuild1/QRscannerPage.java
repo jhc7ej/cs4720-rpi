@@ -42,6 +42,10 @@ public class QRscannerPage extends Activity {
 //        Button myButton = (Button) findViewById(R.id.success);
 //        Button myButton2 = (Button) findViewById(R.id.fail);
         Button myButton3 = (Button) findViewById(R.id.scan);
+        System.out.println(MainActivity.attendees.size());
+        for (int i = 0; i<MainActivity.attendees.size(); i++){
+            System.out.println("this is from arraylist");
+            System.out.println(MainActivity.attendees.get(i)); }
 
 
 //        myButton.setOnClickListener(new OnClickListener() {
@@ -170,16 +174,17 @@ public class QRscannerPage extends Activity {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-
-                for (int i =0; i < MainActivity.attendees.size(); i++) {
-                    if (MainActivity.attendees.get(i).equals(result.getContents())) {
-                        validAttendee = "true";
-                    }
-                    else {
-                        validAttendee = "false";
-                    }
-
+                //for (int i =0; i < MainActivity.attendees.size(); i++) {
+                if (MainActivity.attendees.contains(result.getContents())) {
+                    validAttendee = "true";
+                    System.out.println("color true");
                 }
+                else {
+                    validAttendee = "false";
+                    System.out.println("color false");
+                }
+
+                //}
                 // Handle successful scan
 //                if (contents.equals("true")) {
                    // new MyAsyncTask().execute(message, "true");

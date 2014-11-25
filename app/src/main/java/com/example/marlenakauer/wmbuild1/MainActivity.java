@@ -106,13 +106,17 @@ public class MainActivity extends Activity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
             try {
                 JSONObject json = new JSONObject(result);
+                System.out.println("hi");
                 JSONArray attendeeArray = json.getJSONArray("attendees");
+                //JSONObject attendeeArray = json.getJSONObject("attendees");
+                //System.out.println(attendeeArray.toString());
+                System.out.println(attendeeArray.length());
                 for (int i = 0; i < attendeeArray.length(); i++) {
                     JSONObject tmp = attendeeArray.getJSONObject(i);
-                    attendees.add(tmp.getString("email"));
+                    attendees.add(tmp.getJSONObject("profile").getString("email"));
                 }
             }
             catch (Exception e) {
