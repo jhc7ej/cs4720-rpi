@@ -49,7 +49,15 @@ public class MainActivity extends Activity {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(MainActivity.this, Build1.class);
-               new HttpAsyncTask().execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
+               HttpAsyncTask task1 = new HttpAsyncTask();
+               HttpAsyncTask task2 = new HttpAsyncTask();
+
+               task1.execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
+               if (task1.getStatus() == AsyncTask.Status.FINISHED) {
+                   Toast toast = Toast.makeText(MainActivity.this, "Scan was Cancelled!", Toast.LENGTH_LONG);
+                   task2.execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
+               }
+
                startActivity(intent);
                finish();
            }
@@ -106,17 +114,13 @@ public class MainActivity extends Activity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
             try {
                 JSONObject json = new JSONObject(result);
-                System.out.println("hi");
                 JSONArray attendeeArray = json.getJSONArray("attendees");
-                //JSONObject attendeeArray = json.getJSONObject("attendees");
-                //System.out.println(attendeeArray.toString());
-                System.out.println(attendeeArray.length());
                 for (int i = 0; i < attendeeArray.length(); i++) {
                     JSONObject tmp = attendeeArray.getJSONObject(i);
-                    attendees.add(tmp.getJSONObject("profile").getString("email"));
+                    attendees.add(tmp.getString("email"));
                 }
             }
             catch (Exception e) {
