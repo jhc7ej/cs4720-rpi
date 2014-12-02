@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -27,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -50,7 +52,11 @@ public class MainActivity extends Activity {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(MainActivity.this, Build1.class);
-               new HttpAsyncTask().execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
+               EditText ipText = (EditText) findViewById(R.id.editText2);
+               String message = ipText.getText().toString();
+               String eventbriteurl = "http://www.eventbriteapi.com/v3/events/" + message + "/attendees/?token=F3N6WOE7BNL46UKIRVBU";
+               //new HttpAsyncTask().execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
+               new HttpAsyncTask().execute(eventbriteurl);
                startActivity(intent);
                finish();
            }

@@ -50,7 +50,7 @@ public class Build1 extends Activity {
     }
 
     public static void POST(String url, boolean color) {
-        url = "http://192.168.20.125/rpi/";
+        //url = "http://192.168.20.125/rpi/";
 
         try {
             HttpClient client = new DefaultHttpClient();
