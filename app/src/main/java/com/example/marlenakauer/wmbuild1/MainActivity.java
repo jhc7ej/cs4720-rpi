@@ -51,14 +51,6 @@ public class MainActivity extends Activity {
            public void onClick(View v) {
                Intent intent = new Intent(MainActivity.this, Build1.class);
                new HttpAsyncTask().execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
-               //if (task1.getStatus() == AsyncTask.Status.FINISHED) {
-                   //Toast toast = Toast.makeText(MainActivity.this, "Scan was Cancelled!", Toast.LENGTH_LONG);
-                   //toast.setGravity(Gravity.TOP, 25, 400);
-                   //System.out.println("Second task started");
-                   //toast.show();
-                   //task2.execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
-               //}
-
                startActivity(intent);
                finish();
            }

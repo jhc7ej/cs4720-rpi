@@ -121,7 +121,7 @@ public class QRscannerPage extends Activity {
     }
 
     public static void POST(String url, boolean color) {
-        url = "http://" + url + "/rpi/";
+        url = "http://" + url + "/rpi";
 
         try {
             HttpClient client = new DefaultHttpClient();
