@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">WMbuild1</string>
+    <string name="app_name">Ticket QR Scanner</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_scan_page">scanPage</string>
@@ -13,7 +13,7 @@
     <string name="Select">Select Event</string>
     <string name="Events">To Events</string>
     <string name="title_activity_searchby_date">SearchbyDate</string>
-    <string name="title_activity_splash_screen">Splash Screen</string>
+    <string name="title_activity_splash_screen">Ticket QR Scanner</string>
     <string name="QRScanner">QR Scanner</string>
     <string name="cs4720">CS 4720 Mobile Project</string>
     <string name="justin">Justin Cajayon (jhc3ej)</string>
