@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +56,9 @@ public class MainActivity extends Activity {
                task1.execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
                if (task1.getStatus() == AsyncTask.Status.FINISHED) {
                    Toast toast = Toast.makeText(MainActivity.this, "Scan was Cancelled!", Toast.LENGTH_LONG);
+                   toast.setGravity(Gravity.TOP, 25, 400);
+                   System.out.println("Second task started");
+                   toast.show();
                    task2.execute("http://www.eventbriteapi.com/v3/events/14581147605/attendees/?token=F3N6WOE7BNL46UKIRVBU");
                }
 
@@ -114,7 +118,7 @@ public class MainActivity extends Activity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
             try {
                 JSONObject json = new JSONObject(result);
                 JSONArray attendeeArray = json.getJSONArray("attendees");

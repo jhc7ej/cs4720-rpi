@@ -197,7 +197,7 @@ public class QRscannerPage extends Activity {
                     new MyAsyncTask().execute(message, validAttendee);
 
                 //}
-               Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP, 25, 400);
                 toast.show();
             } else if (resultCode == RESULT_CANCELED) {
