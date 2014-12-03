@@ -19,10 +19,7 @@ import org.json.JSONArray;
 public class Build1 extends Activity {
 
     public final static String EXTRA_MESSAGE = "com.example.marlenakauer.wmbuild1";
-    //Intent myIntent = new Intent(Build1.this, scanPage.class);
 
-    //myIntent.putExtra("key", value);
-    //Build1.this.startActivity(myIntent);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +47,6 @@ public class Build1 extends Activity {
     }
 
     public static void POST(String url, boolean color) {
-        //url = "http://192.168.20.125/rpi/";
 
         try {
             HttpClient client = new DefaultHttpClient();
@@ -77,11 +73,7 @@ public class Build1 extends Activity {
             System.out.println("Uh-oh there's an error!");
             Log.e("MYAPP", "exception", e);
 
-
-
         }
-
-
     }
 
     public void sendMessage(View view) {
@@ -90,12 +82,9 @@ public class Build1 extends Activity {
         String message = ipText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-       // String red = "{\"lights\":\"[{\"lightId\":1,\"red\":255,\"blue\":0,\"green\":0,\"intensity\":.3}],\"propagate\": true}";
 
-        //POST("192.168.20.125/rpi/", true);
-
-        }
-        }
+    }
+}
 
 
 

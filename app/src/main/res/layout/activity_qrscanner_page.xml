@@ -33,7 +33,7 @@
         <!--android:layout_alignParentStart="true" />-->
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/Events"
         android:onClick=""
@@ -42,5 +42,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffffff" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lightswitch"
+        android:onClick=""
+        android:id="@+id/button2"
+        android:textColor="#ffffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/scan"
+        android:layout_marginBottom="112dp" />
 
 </RelativeLayout>

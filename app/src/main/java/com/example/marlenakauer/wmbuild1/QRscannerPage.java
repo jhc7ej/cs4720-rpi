@@ -1,7 +1,10 @@
 package com.example.marlenakauer.wmbuild1;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Fragment;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
+
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,42 +34,31 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QRscannerPage extends Activity {
 
-//    public static ArrayList<String> attendeestable = MainActivity.attendees;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrscanner_page);
 
-//        Button myButton = (Button) findViewById(R.id.success);
-//        Button myButton2 = (Button) findViewById(R.id.fail);
+        Button myButton2 = (Button) findViewById(R.id.button2);
         Button myButton3 = (Button) findViewById(R.id.scan);
         System.out.println(MainActivity.attendees.size());
-        for (int i = 0; i<MainActivity.attendees.size(); i++){
+        for (int i = 0; i < MainActivity.attendees.size(); i++) {
             System.out.println("this is from arraylist");
-            System.out.println(MainActivity.attendees.get(i)); }
+            System.out.println(MainActivity.attendees.get(i));
+        }
 
-
-//        myButton.setOnClickListener(new OnClickListener() {
-//           @Override
-//           public void onClick(View v) {
-//               //Toast.makeText(QRscannerPage.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-//               //new MyAsyncTask().execute(message, "true");
-//
-//               Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//               startActivityForResult(intent, 0);
-//           }
-//        });
-//
-//        myButton2.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(QRscannerPage.this, "Another Button Clicked", Toast.LENGTH_SHORT).show();
-//                new MyAsyncTask().execute(message, "false");
-//            }
-//        });
+        myButton2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = getIntent();
+                final String message = intent2.getStringExtra(Build1.EXTRA_MESSAGE);
+                new OffAsyncTask().execute(message);
+            }
+        });
 
         myButton3.setOnClickListener(new OnClickListener() {
             @Override
@@ -79,7 +72,6 @@ public class QRscannerPage extends Activity {
                 integrator.initiateScan(IntentIntegrator.PRODUCT_CODE_TYPES);
             }
         });
-
     }
 
     @Override
@@ -150,7 +142,6 @@ public class QRscannerPage extends Activity {
             Log.e("WMBuild1", Log.getStackTraceString(e));
 
         }
-
     }
 
     private class MyAsyncTask extends AsyncTask<String, Integer, Double> {
@@ -158,10 +149,7 @@ public class QRscannerPage extends Activity {
         protected Double doInBackground(String... params) {
             POST(params[0], Boolean.valueOf(params[1]));
             return null;
-
         }
-
-
     }
 
     @Override
@@ -171,43 +159,81 @@ public class QRscannerPage extends Activity {
         final String message = intent2.getStringExtra(Build1.EXTRA_MESSAGE);
         //if (requestCode == 0) {
         String validAttendee = "false";
-            if (resultCode == RESULT_OK) {
-                String contents = intent.getStringExtra("SCAN_RESULT");
-                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                //for (int i =0; i < MainActivity.attendees.size(); i++) {
-                if (MainActivity.attendees.contains(result.getContents())) {
-                    validAttendee = "true";
-                    System.out.println("color true");
-                }
-                else {
-                    validAttendee = "false";
-                    System.out.println("color false");
-                }
-
-                //}
-                // Handle successful scan
-//                if (contents.equals("true")) {
-                   // new MyAsyncTask().execute(message, "true");
-                //}
-
-               // else {
-
-                //$$$$$
-                //have database check if id string is in, if in new asynctask.execute(message, "true") else false
-                    new MyAsyncTask().execute(message, validAttendee);
-
-                //}
-                Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP, 25, 400);
-                toast.show();
-            } else if (resultCode == RESULT_CANCELED) {
-                // Handle cancel
-                Toast toast = Toast.makeText(this, "Scan was Cancelled!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP, 25, 400);
-                toast.show();
-
+        if (resultCode == RESULT_OK) {
+            String contents = intent.getStringExtra("SCAN_RESULT");
+            String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+            if (MainActivity.attendees.contains(result.getContents())) {
+                validAttendee = "true";
+                System.out.println("color true");
+            } else {
+                validAttendee = "false";
+                System.out.println("color false");
             }
-        //}
+
+            //have database check if id string is in, if in new asynctask.execute(message, "true") else false
+            new MyAsyncTask().execute(message, validAttendee);
+
+            Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 25, 400);
+            toast.show();
+        } else if (resultCode == RESULT_CANCELED) {
+            // Handle cancel
+            Toast toast = Toast.makeText(this, "Scan was Cancelled!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 25, 400);
+            toast.show();
+        }
     }
 
+    public static void offPOST(String url) {
+        url = "http://" + url + "/rpi";
+
+        try {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(url);
+            JSONObject jsonObj = new JSONObject();
+            JSONArray blah = new JSONArray("[{\"intensity\":.8,\"red\":0,\"blue\":0,\"green\":0,\"lightId\":1}]");
+            jsonObj.accumulate("lights", blah);
+            jsonObj.accumulate("propagate", true);
+            StringEntity se = new StringEntity(jsonObj.toString());
+            post.setEntity(se);
+            post.setHeader("Accept", "application/json");
+            post.setHeader("Content-type", "application/json");
+            HttpResponse response = client.execute(post);
+
+        } catch (Exception e) {
+
+            Log.e("WMBuild1", Log.getStackTraceString(e));
+
+        }
+    }
+
+    public boolean isApplicationSentToBackground(final Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onPause() {
+        Intent intent2 = getIntent();
+        final String message = intent2.getStringExtra(Build1.EXTRA_MESSAGE);
+        if (isApplicationSentToBackground(this)) {
+            new OffAsyncTask().execute(message);
+        }
+        super.onPause();
+    }
+
+    private class OffAsyncTask extends AsyncTask<String, Integer, Double> {
+        @Override
+        protected Double doInBackground(String... params) {
+            offPOST(params[0]);
+            return null;
+        }
+    }
 }

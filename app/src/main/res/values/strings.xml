@@ -24,5 +24,6 @@
     <string name="searchbutton">Search</string>
     <string name="title_activity_event_confirmation">eventConfirmation</string>
     <string name="eventidsearch">Search event by ID (ex. 14581147605)</string>
+    <string name="lightswitch">Turn Off Lights</string>
 
 </resources>

@@ -43,10 +43,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      //String blah = "mak4wd@virginia.edu";
-     // attendees.add("mak4wd@virginia.edu");
-      //attendees.add("jhc7ej@virginia.edu");
-
         Button myButton = (Button) findViewById(R.id.button);
         myButton.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -61,9 +57,7 @@ public class MainActivity extends Activity {
                finish();
            }
         });
-
     }
-
 
     public static String GET(String url){
         InputStream inputStream = null;
@@ -125,9 +119,6 @@ public class MainActivity extends Activity {
             catch (Exception e) {
                 Log.d("JSONObject", e.getLocalizedMessage());
             }
-
-            //etResponse.setText(result);
-        //Parse JSON and add to arraylist
         }
     }
 
