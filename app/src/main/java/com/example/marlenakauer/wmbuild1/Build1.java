@@ -84,6 +84,11 @@ public class Build1 extends Activity {
         startActivity(intent);
 
     }
+    @Override
+    public void onBackPressed() {
+        MainActivity.attendees.clear();
+        super.onBackPressed();
+    }
 }
 
 
